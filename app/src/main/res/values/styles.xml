@@ -49,11 +49,31 @@
         <item name="android:layout_marginBottom">@dimen/spacing_small_8</item>
     </style>
 
+    <style name="rowTextInputLayout">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">@dimen/spacing_large_56</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:layout_marginTop">@dimen/spacing_normal_16</item>
+        <item name="android:layout_marginLeft">@dimen/spacing_normal_16</item>
+        <item name="android:layout_marginRight">@dimen/spacing_normal_16</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="rowEditText" parent="fontCondenset">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:enabled">false</item>
+        <item name="android:textColor">@color/color_black</item>
+        <item name="android:textColorHint">@color/color_grey</item>
+        <item name="android:focusable">false</item>
+    </style>
+
     <style name="horizontalLine">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1dp</item>
         <item name="android:layout_marginLeft">@dimen/spacing_large_56</item>
-        <item name="android:background">@color/color_grey</item>
+        <item name="android:background">@color/color_light_grey</item>
     </style>
 
     <style name="icon">

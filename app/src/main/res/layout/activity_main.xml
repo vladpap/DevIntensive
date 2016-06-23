@@ -67,18 +67,10 @@
             android:src="@drawable/ic_call_black_24dp"/>
 
         <android.support.design.widget.TextInputLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="72dp"
-            android:orientation="vertical"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="@dimen/spacing_small_8"
-            android:gravity="center_vertical">
+            style="@style/rowTextInputLayout">
             <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/fontCondenset"
+                android:id="@+id/phoneNumber"
+                style="@style/rowEditText"
                 android:hint="@string/mobile_phone"
                 android:text="+7 966 095 55 38"
                 android:inputType="phone"/>
@@ -87,11 +79,120 @@
         <ImageView
             style="@style/icon.right"
             android:src="@drawable/ic_phone_in_talk_black_24dp"/>
-
     </LinearLayout>
+
+    <!-- END phone number row -->
 
     <LinearLayout style="@style/horizontalLine"> </LinearLayout>
 
-    <!-- END phone number row -->
+    <!-- Email row -->
+
+    <LinearLayout
+        style="@style/rowContayner">
+
+        <ImageView
+            style="@style/icon.left"
+            android:src="@drawable/ic_local_post_office_black_24dp"/>
+
+        <android.support.design.widget.TextInputLayout
+            style="@style/rowTextInputLayout">
+            <EditText
+                android:id="@+id/email"
+                style="@style/rowEditText"
+                android:hint="@string/email"
+                android:text="vladpap@mail.ru"
+                android:inputType="textEmailAddress"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <ImageView
+            style="@style/icon.right"
+            android:src="@drawable/ic_send_black_24dp"/>
+    </LinearLayout>
+
+    <!-- End email row -->
+
+    <LinearLayout style="@style/horizontalLine"> </LinearLayout>
+
+    <!-- vk row -->
+
+    <LinearLayout
+        style="@style/rowContayner">
+
+        <ImageView
+            style="@style/icon.left"
+            android:src="@drawable/vk"/>
+
+        <android.support.design.widget.TextInputLayout
+            style="@style/rowTextInputLayout">
+            <EditText
+                android:id="@+id/vk"
+                style="@style/rowEditText"
+                android:hint="@string/vk"
+                android:text="https://vk.com/id125528752"
+                android:inputType="text"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <ImageView
+            style="@style/icon.right"
+            android:src="@drawable/ic_remove_red_eye_black_24dp"/>
+    </LinearLayout>
+
+    <!-- End vk row -->
+
+    <LinearLayout style="@style/horizontalLine"> </LinearLayout>
+
+    <!-- github row -->
+
+    <LinearLayout
+        style="@style/rowContayner">
+
+        <ImageView
+            style="@style/icon.left"
+            android:src="@drawable/github"/>
+
+        <android.support.design.widget.TextInputLayout
+            style="@style/rowTextInputLayout">
+            <EditText
+                android:id="@+id/repository"
+                style="@style/rowEditText"
+                android:hint="@string/repository"
+                android:text="github.com/vladpap/DevIntensive"
+                android:inputType="text"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <ImageView
+            style="@style/icon.right"
+            android:src="@drawable/ic_remove_red_eye_black_24dp"/>
+    </LinearLayout>
+
+    <!-- End github row -->
+
+    <LinearLayout style="@style/horizontalLine"> </LinearLayout>
+
+    <!-- About row -->
+
+    <LinearLayout
+        style="@style/rowContayner">
+
+        <ImageView
+            style="@style/icon.left"
+            android:src="@drawable/ic_account_circle_black_24dp"/>
+
+        <android.support.design.widget.TextInputLayout
+            style="@style/rowTextInputLayout">
+            <EditText
+                android:id="@+id/about"
+                style="@style/rowEditText"
+                android:hint="@string/about"
+                android:text="Я буду сильным всем назло, хоть будет трудно улыбаться. Жизнь не закончилась еще, жизнь начинает продолжаться! "
+                android:inputType="text"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <ImageView
+            style="@style/icon.right"
+            android:src="@drawable/ic_remove_red_eye_black_24dp"/>
+    </LinearLayout>
+
+    <!-- End about row -->
 
 </LinearLayout>
