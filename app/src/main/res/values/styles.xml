@@ -8,4 +8,28 @@
         <item name="colorAccent">@color/color_accent</item>
     </style>
 
+    <style name="fontCondenset">
+        <item name="android:fontFamily">sans-serif-condensed</item>
+    </style>
+
+    <!-- style for Linear layout cell header -->
+    <style name="headerCellLinearLayout">
+        <item name="android:layout_weight">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <!-- style for vertical line header -->
+    <style name="headerVerticalLine">
+        <item name="android:layout_width">1dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@color/color_white</item>
+    </style>
+    <!--style text view for header -->
+    <style name="textViewHeader" parent="fontCondenset">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/color_white</item>
+    </style>
 </resources>

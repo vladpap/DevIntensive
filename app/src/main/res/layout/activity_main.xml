@@ -1,16 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".ui.activities.MainActivity">
+    android:paddingBottom="0dp"
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    android:paddingTop="0dp"
+    tools:context=".ui.activities.MainActivity"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_large_96"
+        android:orientation="horizontal"
+        android:background="@color/color_dark_grey"
+        android:paddingTop="@dimen/spacing_medial_24"
+        android:paddingBottom="@dimen/spacing_medial_24">
+        <!-- HEADER -->
+        <LinearLayout
+            style="@style/headerCellLinearLayout"
+            android:layout_weight="1.25">
+            <TextView
+                style="@style/textViewHeader"
+                android:text="5"
+                android:textSize="@dimen/font_larger_22"/>
+            <TextView
+                style="@style/textViewHeader"
+                android:text="Рейтинг"
+                android:textSize="@dimen/font_small_12"/>
+        </LinearLayout>
+        <LinearLayout style="@style/headerVerticalLine"> </LinearLayout>
+        <LinearLayout
+            style="@style/headerCellLinearLayout"
+            android:layout_weight="2">
+            <TextView
+                style="@style/textViewHeader"
+                android:text="5"
+                android:textSize="@dimen/font_larger_22"/>
+            <TextView
+                style="@style/textViewHeader"
+                android:text="Написано строк кода"
+                android:textSize="@dimen/font_small_12"/>
+        </LinearLayout>
+        <LinearLayout style="@style/headerVerticalLine"> </LinearLayout>
+        <LinearLayout
+            style="@style/headerCellLinearLayout"
+            android:layout_weight="1.25">
+            <TextView
+                style="@style/textViewHeader"
+                android:text="5"
+                android:textSize="@dimen/font_larger_22"/>
+            <TextView
+                style="@style/textViewHeader"
+                android:text="Проектов"
+                android:textSize="@dimen/font_small_12"/>
+        </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
-</RelativeLayout>
+    </LinearLayout>
+    <!-- END HEADER -->
+
+</LinearLayout>

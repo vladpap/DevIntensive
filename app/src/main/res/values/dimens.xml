@@ -8,6 +8,8 @@
     <dimen name="size_medial_48">48dp</dimen>
     <dimen name="size_medium_56">56dp</dimen>
     <dimen name="size_large_72">72dp</dimen>
+    <dimen name="size_large_96">96dp</dimen>
+    <dimen name="size_large_144">144dp</dimen>
 
     <!-- font sizes -->
     <dimen name="font_small_12">12sp</dimen>
