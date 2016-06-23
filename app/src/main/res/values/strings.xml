@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Владимир Папин</string>
+    <string name="rating">Рейтинг</string>
+    <string name="code_line">Написано строк кода</string>
+    <string name="project">Проектов</string>
+    <string name="mobile_phone">Мобильный телефон</string>
 </resources>

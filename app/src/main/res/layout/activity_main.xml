@@ -11,52 +11,87 @@
     android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/size_large_96"
+        android:layout_height="@dimen/size_large_112"
         android:orientation="horizontal"
         android:background="@color/color_dark_grey"
-        android:paddingTop="@dimen/spacing_medial_24"
+        android:paddingTop="@dimen/spacing_medium_32"
         android:paddingBottom="@dimen/spacing_medial_24">
         <!-- HEADER -->
         <LinearLayout
             style="@style/headerCellLinearLayout"
             android:layout_weight="1.25">
             <TextView
-                style="@style/textViewHeader"
-                android:text="5"
-                android:textSize="@dimen/font_larger_22"/>
+                style="@style/textViewHeaderNumber"
+                android:id="@+id/count_rating"
+                android:text="5"/>
             <TextView
-                style="@style/textViewHeader"
-                android:text="Рейтинг"
-                android:textSize="@dimen/font_small_12"/>
+                style="@style/textViewHeaderText"
+                android:text="@string/rating"/>
         </LinearLayout>
         <LinearLayout style="@style/headerVerticalLine"> </LinearLayout>
         <LinearLayout
             style="@style/headerCellLinearLayout"
             android:layout_weight="2">
             <TextView
-                style="@style/textViewHeader"
-                android:text="5"
-                android:textSize="@dimen/font_larger_22"/>
+                style="@style/textViewHeaderNumber"
+                android:id="@+id/count_code_line"
+                android:text="5"/>
             <TextView
-                style="@style/textViewHeader"
-                android:text="Написано строк кода"
-                android:textSize="@dimen/font_small_12"/>
+                style="@style/textViewHeaderText"
+                android:text="@string/code_line"/>
         </LinearLayout>
         <LinearLayout style="@style/headerVerticalLine"> </LinearLayout>
         <LinearLayout
             style="@style/headerCellLinearLayout"
             android:layout_weight="1.25">
             <TextView
-                style="@style/textViewHeader"
-                android:text="5"
-                android:textSize="@dimen/font_larger_22"/>
+                style="@style/textViewHeaderNumber"
+                android:id="@+id/count_projects"
+                android:text="5"/>
             <TextView
-                style="@style/textViewHeader"
-                android:text="Проектов"
-                android:textSize="@dimen/font_small_12"/>
+                style="@style/textViewHeaderText"
+                android:text="@string/project"/>
         </LinearLayout>
 
     </LinearLayout>
     <!-- END HEADER -->
+
+
+    <!-- Phone number row -->
+
+    <LinearLayout
+        style="@style/rowContayner">
+
+        <ImageView
+            style="@style/icon.left"
+            android:src="@drawable/ic_call_black_24dp"/>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="72dp"
+            android:orientation="vertical"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="@dimen/spacing_small_8"
+            android:gravity="center_vertical">
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/fontCondenset"
+                android:hint="@string/mobile_phone"
+                android:text="+7 966 095 55 38"
+                android:inputType="phone"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <ImageView
+            style="@style/icon.right"
+            android:src="@drawable/ic_phone_in_talk_black_24dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout style="@style/horizontalLine"> </LinearLayout>
+
+    <!-- END phone number row -->
 
 </LinearLayout>

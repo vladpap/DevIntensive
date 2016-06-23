@@ -9,13 +9,14 @@
     <dimen name="size_medium_56">56dp</dimen>
     <dimen name="size_large_72">72dp</dimen>
     <dimen name="size_large_96">96dp</dimen>
-    <dimen name="size_large_144">144dp</dimen>
+    <dimen name="size_large_112">112dp</dimen>
 
     <!-- font sizes -->
     <dimen name="font_small_12">12sp</dimen>
     <dimen name="font_normal_15">15sp</dimen>
     <dimen name="font_large_18">18sp</dimen>
-    <dimen name="font_larger_22">22sp</dimen>
+    <dimen name="font_large_22">22sp</dimen>
+    <dimen name="font_large_28">28sp</dimen>
 
     <!-- Spaces -->
     <dimen name="spacing_small_8">8dp</dimen>
