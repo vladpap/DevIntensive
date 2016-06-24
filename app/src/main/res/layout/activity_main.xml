@@ -89,7 +89,7 @@
 
                         <ImageView
                             style="@style/icon.right"
-                            android:src="@drawable/ic_phone_in_talk_black_24dp"/>
+                            android:src="@drawable/ic_perm_phone_msg_black_24dp"/>
                     </LinearLayout>
 
                     <!-- END phone number row -->
