@@ -1,77 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
+<android.support.v4.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main_coordinator_content"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="0dp"
-    android:paddingLeft="0dp"
-    android:paddingRight="0dp"
-    android:paddingTop="0dp"
-    tools:context=".ui.activities.MainActivity"
-    android:orientation="vertical">
-    <android.support.v4.widget.NestedScrollView
+    tools:context=".ui.activities.MainActivity">
+
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/main_coordinator_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="0dp"
+            android:paddingLeft="0dp"
+            android:paddingRight="0dp"
+            android:paddingTop="0dp">
 
-            <LinearLayout
+            <android.support.v4.widget.NestedScrollView
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/size_large_112"
-                android:orientation="horizontal"
-                android:background="@color/color_dark_grey"
-                android:paddingTop="@dimen/spacing_medium_32"
-                android:paddingBottom="@dimen/spacing_medial_24">
-                <!-- HEADER -->
-                <LinearLayout
-                    style="@style/headerCellLinearLayout"
-                    android:layout_weight="1.25">
-                    <TextView
-                        style="@style/textViewHeaderNumber"
-                        android:id="@+id/count_rating"
-                        android:text="5"/>
-                    <TextView
-                        style="@style/textViewHeaderText"
-                        android:text="@string/rating"/>
-                </LinearLayout>
-                <View style="@style/headerVerticalLine"/>
-                <LinearLayout
-                    style="@style/headerCellLinearLayout"
-                    android:layout_weight="2">
-                    <TextView
-                        style="@style/textViewHeaderNumber"
-                        android:id="@+id/count_code_line"
-                        android:text="5"/>
-                    <TextView
-                        style="@style/textViewHeaderText"
-                        android:text="@string/code_line"/>
-                </LinearLayout>
-                <View style="@style/headerVerticalLine"/>
-                <LinearLayout
-                    style="@style/headerCellLinearLayout"
-                    android:layout_weight="1.25">
-                    <TextView
-                        style="@style/textViewHeaderNumber"
-                        android:id="@+id/count_projects"
-                        android:text="5"/>
-                    <TextView
-                        style="@style/textViewHeaderText"
-                        android:text="@string/project"/>
-                </LinearLayout>
+                android:layout_height="match_parent">
 
-            </LinearLayout>
-            <!-- END HEADER -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/size_large_112"
+                        android:background="@color/color_dark_grey"
+                        android:orientation="horizontal"
+                        android:paddingBottom="@dimen/spacing_medial_24"
+                        android:paddingTop="@dimen/spacing_medium_32">
+                        <!-- HEADER -->
+                        <LinearLayout
+                            style="@style/headerCellLinearLayout"
+                            android:layout_weight="1.25">
 
+                            <TextView
+                                android:id="@+id/count_rating"
+                                style="@style/textViewHeaderNumber"
+                                android:text="5"/>
+
+                            <TextView
+                                style="@style/textViewHeaderText"
+                                android:text="@string/rating"/>
+                        </LinearLayout>
+
+                        <View style="@style/headerVerticalLine"/>
+
+                        <LinearLayout
+                            style="@style/headerCellLinearLayout"
+                            android:layout_weight="2">
+
+                            <TextView
+                                android:id="@+id/count_code_line"
+                                style="@style/textViewHeaderNumber"
+                                android:text="5"/>
+
+                            <TextView
+                                style="@style/textViewHeaderText"
+                                android:text="@string/code_line"/>
+                        </LinearLayout>
+
+                        <View style="@style/headerVerticalLine"/>
+
+                        <LinearLayout
+                            style="@style/headerCellLinearLayout"
+                            android:layout_weight="1.25">
+
+                            <TextView
+                                android:id="@+id/count_projects"
+                                style="@style/textViewHeaderNumber"
+                                android:text="5"/>
+
+                            <TextView
+                                style="@style/textViewHeaderText"
+                                android:text="@string/project"/>
+                        </LinearLayout>
+
+                    </LinearLayout>
+                    <!-- END HEADER -->
 
 
                     <!-- Phone number row -->
@@ -85,12 +98,13 @@
 
                         <android.support.design.widget.TextInputLayout
                             style="@style/rowTextInputLayout">
+
                             <EditText
                                 android:id="@+id/phoneNumber"
                                 style="@style/rowEditText"
                                 android:hint="@string/mobile_phone"
-                                android:text="+7 966 095 55 38"
-                                android:inputType="phone"/>
+                                android:inputType="phone"
+                                android:text="+7 966 095 55 38"/>
                         </android.support.design.widget.TextInputLayout>
 
                         <ImageView
@@ -114,12 +128,13 @@
 
                         <android.support.design.widget.TextInputLayout
                             style="@style/rowTextInputLayout">
+
                             <EditText
                                 android:id="@+id/email"
                                 style="@style/rowEditText"
                                 android:hint="@string/email"
-                                android:text="vladpap@mail.ru"
-                                android:inputType="textEmailAddress"/>
+                                android:inputType="textEmailAddress"
+                                android:text="vladpap@mail.ru"/>
                         </android.support.design.widget.TextInputLayout>
 
                         <ImageView
@@ -142,12 +157,13 @@
 
                         <android.support.design.widget.TextInputLayout
                             style="@style/rowTextInputLayout">
+
                             <EditText
                                 android:id="@+id/vk"
                                 style="@style/rowEditText"
                                 android:hint="@string/vk"
-                                android:text="https://vk.com/id125528752"
-                                android:inputType="text"/>
+                                android:inputType="text"
+                                android:text="https://vk.com/id125528752"/>
                         </android.support.design.widget.TextInputLayout>
 
                         <ImageView
@@ -170,12 +186,13 @@
 
                         <android.support.design.widget.TextInputLayout
                             style="@style/rowTextInputLayout">
+
                             <EditText
                                 android:id="@+id/repository"
                                 style="@style/rowEditText"
                                 android:hint="@string/repository"
-                                android:text="github.com/vladpap/DevIntensive"
-                                android:inputType="text"/>
+                                android:inputType="text"
+                                android:text="github.com/vladpap/DevIntensive"/>
                         </android.support.design.widget.TextInputLayout>
 
                         <ImageView
@@ -200,12 +217,13 @@
                             style="@style/rowTextInputLayout"
                             android:layout_height="wrap_content"
                             android:gravity="center">
+
                             <EditText
                                 android:id="@+id/about"
                                 style="@style/rowEditText"
                                 android:hint="@string/about"
-                                android:text="Я буду сильным всем назло, хоть будет трудно улыбаться. Жизнь не закончилась еще, жизнь начинает продолжаться! Наверное единственное, что очень не нравится - разбираться в чужом коде, исправлять чужие ошибки, так как, как правило, неработающий (работающий неправильно) код, который приходится исправлять - недоделанный, плохой код, написанный коряво или, того хуже, вообще &quot;говнокод&quot;. В этих случаях так и просится сказать цитату из анекдота: &quot;Чукча не читатель, Чукча - писатель!&quot;. Вообще я считаю, разработчик, программист, пишущий любую систему или программу должен представить, что пользователи, которые будут пользоваться его разработкой, а тем более люди, которые потом будут сопровождать его разработку - психопаты, страдающие маниакальной стратью к насилию и жестокости, и которые прекрасно знаю, где проживает этот самый разработчик и где его можно встретить, чтобы отблагодарить по достоинству. Все мы делаем ошибки, не без этого, но у некоторых это просто паталогия какая-то."
-                                android:inputType="textMultiLine"/>
+                                android:inputType="textMultiLine"
+                                android:text="Я буду сильным всем назло, хоть будет трудно улыбаться. Жизнь не закончилась еще, жизнь начинает продолжаться! Наверное единственное, что очень не нравится - разбираться в чужом коде, исправлять чужие ошибки, так как, как правило, неработающий (работающий неправильно) код, который приходится исправлять - недоделанный, плохой код, написанный коряво или, того хуже, вообще &quot;говнокод&quot;. В этих случаях так и просится сказать цитату из анекдота: &quot;Чукча не читатель, Чукча - писатель!&quot;. Вообще я считаю, разработчик, программист, пишущий любую систему или программу должен представить, что пользователи, которые будут пользоваться его разработкой, а тем более люди, которые потом будут сопровождать его разработку - психопаты, страдающие маниакальной стратью к насилию и жестокости, и которые прекрасно знаю, где проживает этот самый разработчик и где его можно встретить, чтобы отблагодарить по достоинству. Все мы делаем ошибки, не без этого, но у некоторых это просто паталогия какая-то."/>
                         </android.support.design.widget.TextInputLayout>
 
                         <ImageView
@@ -214,7 +232,8 @@
                     </LinearLayout>
 
                     <!-- End about row -->
+                </LinearLayout>
+            </android.support.v4.widget.NestedScrollView>
         </LinearLayout>
-    </android.support.v4.widget.NestedScrollView>
-</LinearLayout>
-</android.support.design.widget.CoordinatorLayout>
+    </android.support.design.widget.CoordinatorLayout>
+</android.support.v4.widget.DrawerLayout>
