@@ -1,3 +1,11 @@
 <resources>
-    <string name="app_name">DevIntensive</string>
+    <string name="app_name">Владимир Папин</string>
+    <string name="rating">Рейтинг</string>
+    <string name="code_line">Написано строк кода</string>
+    <string name="project">Проектов</string>
+    <string name="mobile_phone">Мобильный телефон</string>
+    <string name="email">E-mail</string>
+    <string name="vk">Профиль в Vk</string>
+    <string name="repository">Репозиторий</string>
+    <string name="about">О себе</string>
 </resources>
