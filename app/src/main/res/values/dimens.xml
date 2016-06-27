@@ -11,6 +11,8 @@
     <dimen name="size_large_96">96dp</dimen>
     <dimen name="size_large_112">112dp</dimen>
 
+    <dimen name="profile_image_size">256dp</dimen>
+
     <!-- font sizes -->
     <dimen name="font_small_12">12sp</dimen>
     <dimen name="font_normal_15">15sp</dimen>
