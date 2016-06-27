@@ -90,4 +90,8 @@
     <style name="icon.right" parent="icon">
         <item name="android:layout_marginRight">@dimen/spacing_medium_32</item>
     </style>
+
+    <style name="custom_dialog_progress">
+        <item name="android:fullDark">@android:color/transparent</item>
+    </style>
 </resources>
