@@ -1,6 +1,8 @@
 package com.softdesign.devintensive.ui.activities;
 
 import android.os.Handler;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +16,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     private static final String TAG = ConstantManager.TAG_PREFIX + "Main Activity";
     private ImageView mCallMsgImg;
+    private CoordinatorLayout mCoordinatorLayout;
 
 
     @Override
@@ -23,7 +26,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         Log.d(TAG, "onCreate");
 
         mCallMsgImg = (ImageView)findViewById(R.id.call_msg_img);
+        mCoordinatorLayout = (CoordinatorLayout) findViewById(R.id.main_coordinator_content);
+
         mCallMsgImg.setOnClickListener(this);
+
+        if (savedInstanceState == null) {
+        } else {
+        }
+
     }
 
     @Override
@@ -73,14 +83,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 break;
         }
     }
-    private void runWithDelay() {
-        final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                //TODO: Run with delay
-                hideProgress();
-            }
-        }, 3000);
+
+    private void showSnackBar (String message) {
+        Snackbar.make(mCoordinatorLayout, message, Snackbar.LENGTH_LONG).show();
     }
 }
