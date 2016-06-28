@@ -12,6 +12,7 @@ public class DataManager {
 
 
     public DataManager() {
+
         this.mPreferenceManager = new PreferenceManager();
     }
 
@@ -25,4 +26,6 @@ public class DataManager {
     public PreferenceManager getPreferenceManager() {
         return mPreferenceManager;
     }
+
+
 }
