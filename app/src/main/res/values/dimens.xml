@@ -30,4 +30,6 @@
     <dimen name="spacing_large_56">56dp</dimen>
     <dimen name="spacing_larger_72">72dp</dimen>
 
+    <dimen name="fab_space_right">16dp</dimen>
+
 </resources>

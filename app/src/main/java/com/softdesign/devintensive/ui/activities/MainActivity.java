@@ -2,8 +2,10 @@ package com.softdesign.devintensive.ui.activities;
 
 import android.os.Handler;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -13,18 +15,30 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.softdesign.devintensive.R;
 import com.softdesign.devintensive.utils.ConstantManager;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     private static final String TAG = ConstantManager.TAG_PREFIX + "Main Activity";
+
+    private boolean mCurrentEditMode = false;
+
     private ImageView mCallMsgImg;
     private CoordinatorLayout mCoordinatorLayout;
     private Toolbar mToolbar;
     private DrawerLayout mNavigationDrawer;
+    private FloatingActionButton mFloatingActionButton;
+    private EditText mUserPhone, mUserMail, mUserVk, mUserGit, mUserAbout;
+
+    private List<EditText> mUserInfo;
+
 
 
     @Override
@@ -37,14 +51,34 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         mCoordinatorLayout = (CoordinatorLayout) findViewById(R.id.main_coordinator_content);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mNavigationDrawer = (DrawerLayout) findViewById(R.id.navigation_drawer);
+        mFloatingActionButton = (FloatingActionButton) findViewById(R.id.fab);
 
-        mCallMsgImg.setOnClickListener(this);
+        mUserPhone = (EditText) findViewById(R.id.phoneNumber);
+        mUserMail  = (EditText) findViewById(R.id.email);
+        mUserVk    = (EditText) findViewById(R.id.vk);
+        mUserGit   = (EditText) findViewById(R.id.repository);
+        mUserAbout = (EditText) findViewById(R.id.about);
+
+        mUserInfo = new ArrayList<>();
+        mUserInfo.add(mUserPhone);
+        mUserInfo.add(mUserMail);
+        mUserInfo.add(mUserVk);
+        mUserInfo.add(mUserGit);
+        mUserInfo.add(mUserAbout);
+
+        mFloatingActionButton.setOnClickListener(this);
         setupToolbar();
         setupDrawer();
 
+
+
         if (savedInstanceState == null) {
+//            активити запускается впервые
         } else {
+            mCurrentEditMode = savedInstanceState.getBoolean(ConstantManager.EDIT_MODE_KEY);
         }
+
+        changeEditMode(mCurrentEditMode);
 
     }
 
@@ -97,11 +131,17 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.call_msg_img :
-//                showProgress();
-//                runWithDelay();
+            case R.id.fab :
+                mCurrentEditMode = !mCurrentEditMode;
+                changeEditMode(mCurrentEditMode);
                 break;
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean(ConstantManager.EDIT_MODE_KEY, mCurrentEditMode);
     }
 
     private void showSnackBar (String message) {
@@ -128,5 +168,32 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 return false;
             }
         });
+    }
+
+    /**
+     *
+     * переключает режим редактирования
+     * @param mode если true режим редактирования, если false режим просмотра
+     */
+    private void changeEditMode(boolean mode) {
+        for (EditText userValue : mUserInfo) {
+            userValue.setEnabled(mode);
+            userValue.setFocusable(mode);
+            userValue.setFocusableInTouchMode(mode);
+        }
+        if (!mCurrentEditMode) {
+            mFloatingActionButton.setImageResource(R.drawable.ic_create_black_24dp);
+        } else {
+            mFloatingActionButton.setImageResource(R.drawable.ic_done_black_24dp);
+        }
+        mCurrentEditMode = mode;
+    }
+
+    private void loadUserInfoValue() {
+
+    }
+
+    private void saveUserInfoValue() {
+
     }
 }
