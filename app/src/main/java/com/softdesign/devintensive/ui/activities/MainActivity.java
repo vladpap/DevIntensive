@@ -54,7 +54,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.d(TAG, "onCreate");
+//        Log.d(TAG, "onCreate");
 
         mDataManager = DataManager.getINSTANCE();
 
@@ -77,6 +77,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         mUserInfoViews.add(mUserVk);
         mUserInfoViews.add(mUserGit);
         mUserInfoViews.add(mUserAbout);
+
+        for (EditText  aaa: mUserInfoViews) {
+            Log.d(TAG, aaa.getText().toString());
+        }
 
         mFloatingActionButton.setOnClickListener(this);
 
@@ -109,39 +113,39 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     @Override
     protected void onStart() {
         super.onStart();
-        Log.d(TAG, "onStart");
+//        Log.d(TAG, "onStart");
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
-        Log.e(TAG, "onRestart");
+//        Log.e(TAG, "onRestart");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        Log.d(TAG, "onResume");
+//        Log.d(TAG, "onResume");
     }
 
 
     @Override
     protected void onPause() {
         super.onPause();
-        Log.d(TAG, "onPause");
+//        Log.d(TAG, "onPause");
         saveUserInfoValue();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        Log.d(TAG, "onStop");
+//        Log.d(TAG, "onStop");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Log.d(TAG, "onDestroy");
+//        Log.d(TAG, "onDestroy");
     }
 
 
@@ -216,6 +220,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     private void loadUserInfoValue() {
         List<String> userData = mDataManager.getPreferenceManager().loadUserProfileData();
+        if (userData == null) {
+            return;
+        }
         for (int i = 0; i < userData.size(); i++) {
             mUserInfoViews.get(i).setText(userData.get(i));
         }

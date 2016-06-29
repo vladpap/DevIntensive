@@ -37,8 +37,12 @@ public class PreferenceManager {
     public List<String> loadUserProfileData() {
         List<String> userField = new ArrayList<>();
         for (int i = 0; i < USER_FIELDS.length; i++) {
-            userField.add(mSharedPreferences.getString(USER_FIELDS[i], "aaaaa"));
+            userField.add(mSharedPreferences.getString(USER_FIELDS[i], ConstantManager.NULL_SHARE_PREFERENCES));
         }
-        return userField;
+        if (userField.get(0).equals(ConstantManager.NULL_SHARE_PREFERENCES)) {
+            return null;
+        } else {
+            return userField;
+        }
     }
 }
