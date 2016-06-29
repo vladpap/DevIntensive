@@ -103,4 +103,9 @@
     <style name="custom_dialog_progress">
         <item name="android:fullDark">@android:color/transparent</item>
     </style>
+
+    <style name="nested_scroll_view">
+        <item name="android:layout_marginTop">@dimen/spacing_medium_51</item>
+        <item name="android:paddingTop">@dimen/spacing_medium_51</item>
+    </style>
 </resources>
