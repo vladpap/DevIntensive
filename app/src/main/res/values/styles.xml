@@ -8,6 +8,15 @@
         <item name="colorAccent">@color/color_accent</item>
     </style>
 
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
     <style name="fontCondenset">
         <item name="android:fontFamily">sans-serif-condensed</item>
     </style>
@@ -23,7 +32,7 @@
     <!-- style for vertical line header -->
     <style name="headerVerticalLine">
         <item name="android:layout_width">1dp</item>
-        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_height">@dimen/spacing_large_56</item>
         <item name="android:background">@color/color_white</item>
     </style>
     <!--style text view for header -->
@@ -89,5 +98,14 @@
 
     <style name="icon.right" parent="icon">
         <item name="android:layout_marginRight">@dimen/spacing_medium_32</item>
+    </style>
+
+    <style name="custom_dialog_progress">
+        <item name="android:fullDark">@android:color/transparent</item>
+    </style>
+
+    <style name="nested_scroll_view">
+        <item name="android:layout_marginTop">@dimen/spacing_medium_51</item>
+        <item name="android:paddingTop">@dimen/spacing_medium_51</item>
     </style>
 </resources>
