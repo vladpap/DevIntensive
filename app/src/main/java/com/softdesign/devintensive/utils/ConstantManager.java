@@ -14,6 +14,7 @@ public interface ConstantManager {
     String USER_ABOUT_KEY = "USER_ABOUT_KEY";
     String USER_PHOTO_KEY = "USER_PHOTO_KEY";
     String NULL_SHARE_PREFERENCES = "aaaaa123566";
+    String LOGIN_KEY = "LOGIN_KEY";
     int LOAD_PROFILE_PHOTO = 100;
     int REQUEST_CAMERA_PICTURE = 110;
     int REQUEST_GALLERY_PICTURE = 115;
@@ -21,4 +22,5 @@ public interface ConstantManager {
     int CAMERA_REQUEST_PERMITION_CODE = 881;
     int SEND_SMS_REQUEST_PERMITION_CODE = 883;
     int CALL_PHONE_REQUEST_PERMITION_CODE = 882;
+    int REQUEST_LOGIN_CODE = 300;
 }

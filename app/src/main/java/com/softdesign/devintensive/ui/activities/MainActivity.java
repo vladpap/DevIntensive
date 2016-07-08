@@ -6,15 +6,7 @@ import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
-import android.graphics.Rect;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -283,6 +275,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
                 showSnackBar(item.getTitle().toString());
+                if (item.getItemId() == R.id.user_profile_login) {
+                    startLoginActivity();
+                }
                 item.setChecked(true);
                 mNavigationDrawer.closeDrawer(GravityCompat.START);
                 return false;
@@ -311,6 +306,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                     mSelectedImage = Uri.fromFile(mPhotoFile);
                     insertProfileImage(mSelectedImage);
                 }
+                break;
+            case ConstantManager.REQUEST_LOGIN_CODE:
+                // TODO: 08.07.16 Обработка реквеста логин активити
+                showSnackBar(data.getStringExtra(ConstantManager.LOGIN_KEY) + " : " + resultCode);
+                break;
         }
     }
 
@@ -322,6 +322,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
      * @param mode если true режим редактирования, если false режим просмотра
      */
     private void changeEditMode(boolean mode) {
+        mUserPhone.requestFocus();
         for (EditText userValue : mUserInfoViews) {
             userValue.setEnabled(mode);
             userValue.setFocusable(mode);
@@ -335,6 +336,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             saveUserInfoValue();
             uploadAvatar();
         } else {
+            mUserPhone.requestFocus();
             mFloatingActionButton.setImageResource(R.drawable.ic_done_black_24dp);
             mCollapsingToolbar.setExpandedTitleColor(Color.TRANSPARENT);
             lockToolbar();
@@ -343,6 +345,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         mCurrentEditMode = mode;
     }
 
+    /**
+     * Извлечение данных из PreferenceManager
+     */
     private void loadUserInfoValue() {
         List<String> userData = mDataManager.getPreferenceManager().loadUserProfileData();
         if (userData == null) {
@@ -353,6 +358,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         }
     }
 
+    /**
+     * Сохранение данных в PreferenceManager
+     */
     private void saveUserInfoValue() {
         List<String> userDate = new ArrayList<>();
         for (EditText userFieldView : mUserInfoViews) {
@@ -388,6 +396,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         }
     }
 
+    /**
+     *  Вызывается Snakebar с кнопкой setting
+     */
     private void viewSnakebarPermission() {
         Snackbar.make(mCoordinatorLayout, R.string.ask_permission_snakebar, Snackbar.LENGTH_LONG)
                 .setAction(R.string.allow, new View.OnClickListener() {
@@ -398,6 +409,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 }).show();
     }
 
+    /**
+     *  Cоздание запроса permission для камеры
+     *   Manifest.permission.CAMERA
+     *   Manifest.permission.WRITE_EXTERNAL_STORAGE
+     *   или одно из них в зависимости от уже разрешенных
+     */
     private void askPermissionCamera() {
         ArrayList<String> listPermission = new ArrayList<>();
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
@@ -410,6 +427,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         ActivityCompat.requestPermissions(this, stringArray, ConstantManager.CAMERA_REQUEST_PERMITION_CODE);
     }
 
+    /**
+     *  Обработка запросов permission
+     *  Если запрещен показ запросов, то показывается Snakebar
+     * @param requestCode
+     * @param permissions
+     * @param grantResults
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == ConstantManager.CAMERA_REQUEST_PERMITION_CODE) {
@@ -462,12 +486,18 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         mProfilePlaceholder.setVisibility(View.VISIBLE);
     }
 
+    /**
+     * Блокировка Toolbar при редактировании
+     */
     private void lockToolbar() {
         mAppBarLayout.setExpanded(true, true);
         mAppBarParam.setScrollFlags(0);
         mCollapsingToolbar.setLayoutParams(mAppBarParam);
     }
 
+    /**
+     *  Разблокировка Toolbar
+     */
     private void unlockToolbar() {
         mAppBarParam.setScrollFlags(AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL|
                 AppBarLayout.LayoutParams.SCROLL_FLAG_EXIT_UNTIL_COLLAPSED);
@@ -523,6 +553,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         return image;
     }
 
+    /**
+     * Установка битмап в профайл вью
+     * @param selectedImage
+     */
     private void insertProfileImage(Uri selectedImage) {
         Picasso.with(this)
                 .load(selectedImage)
@@ -530,6 +564,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         mDataManager.getPreferenceManager().saveUserPhoto(selectedImage);
     }
 
+    /**
+     *  установка битмап в аватар уменьшение размеров и скругление
+     */
     private void uploadAvatar() {
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
 
@@ -542,25 +579,40 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 .into(navImgView);
     }
 
+    /**
+     *  Вызов системных установок приложения
+     */
     public void openApplicationSetting() {
         Intent appSettingIntent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:" + getPackageName()));
         startActivityForResult(appSettingIntent, ConstantManager.PERMITION_REQUEST_SETTING_CODE);
     }
 
+    /**
+     *  Открытие веб страницы
+     * @param url
+     */
     private void openWebPage(String url) {
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url.contains("http://") ? url : ("http://" + url)));
         startActivity(browserIntent);
     }
 
+    /**
+     * Отправка почты
+     * @param email
+     */
     private void sendEmail(String email) {
         Intent sendEmailIntent = new Intent(Intent.ACTION_SEND);
         sendEmailIntent.setType("text/plain");
         sendEmailIntent.putExtra(Intent.EXTRA_EMAIL, new String[] {email});
-        sendEmailIntent.putExtra(Intent.EXTRA_SUBJECT, "Content subject");
-        sendEmailIntent.putExtra(Intent.EXTRA_TEXT, "Content");
+        sendEmailIntent.putExtra(Intent.EXTRA_SUBJECT, "Тема письма");
+        sendEmailIntent.putExtra(Intent.EXTRA_TEXT, "Текст письма");
         startActivity(Intent.createChooser(sendEmailIntent, "Отправка письма..."));
     }
 
+    /**
+     *  Вызов по номеру телефона
+     * @param phoneNumber
+     */
     private void callPhoneNumber(String phoneNumber) {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
             Intent dialIntent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + correctPhoneNumberForSendSmsOrCall(phoneNumber)));
@@ -570,20 +622,38 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         }
     }
 
+    /**
+     * Отправка СМС на номер телефона
+     * @param phoneNumber
+     */
     private void sendSms(String phoneNumber) {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED) {
             Intent sendSmsIntent = new Intent(Intent.ACTION_VIEW);
             sendSmsIntent.putExtra("address", correctPhoneNumberForSendSmsOrCall(phoneNumber));
-            sendSmsIntent.putExtra("sms_body", "sms text");
+            sendSmsIntent.putExtra("sms_body", "Текст сообщения");
             sendSmsIntent.setType("vnd.android-dir/mms-sms");
             startActivity(sendSmsIntent);
         } else {
             ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.SEND_SMS} , ConstantManager.SEND_SMS_REQUEST_PERMITION_CODE);
         }
     }
+
+    /**
+     * Убирает из номера телефона пробелы и скобки
+     * @param phoneNum
+     * @return
+     */
     private String correctPhoneNumberForSendSmsOrCall(String phoneNum) {
         return phoneNum.replace(" ", "")
                 .replaceAll("\\(", "")
                 .replaceAll("\\)", "");
+    }
+
+    /**
+     *  Вызов логин активити
+     */
+    private void startLoginActivity() {
+        Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
+        startActivityForResult(loginIntent, ConstantManager.REQUEST_LOGIN_CODE);
     }
 }

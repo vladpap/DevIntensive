@@ -108,4 +108,22 @@
         <item name="android:layout_marginTop">@dimen/spacing_medium_51</item>
         <item name="android:paddingTop">@dimen/spacing_medium_51</item>
     </style>
+
+
+
+    <style name="rowTextInputLayoutLogin">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/spacing_large_56</item>
+        <item name="android:layout_marginTop">@dimen/spacing_small_8</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="rowEditTextLogin" parent="fontCondenset">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:textColor">@color/color_black</item>
+        <item name="android:textSize">@dimen/font_normal_15</item>
+        <item name="android:textColorHint">@color/color_grey</item>
+    </style>
 </resources>

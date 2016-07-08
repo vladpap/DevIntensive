@@ -11,6 +11,7 @@
     <color name="color_light_grey">#9c9c9c</color>
     <color name="color_white">#ffffff</color>
     <color name="color_trancporent_85">#D9000000</color>
+    <color name="color_login_red">#e7463c</color>
 </resources>
 
 <!--
