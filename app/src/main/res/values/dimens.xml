@@ -32,5 +32,6 @@
     <dimen name="spacing_larger_72">72dp</dimen>
 
     <dimen name="fab_space_right">16dp</dimen>
+    <dimen name="placeholder_photo_size_90">90dp</dimen>
 
 </resources>

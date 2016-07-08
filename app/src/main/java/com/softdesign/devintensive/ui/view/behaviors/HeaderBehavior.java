@@ -62,8 +62,8 @@ public class HeaderBehavior  extends CoordinatorLayout.Behavior<LinearLayout> {
         if (check < mScrollSize && check > 0) {
             mProcScroll = (100 * (mMaxScroll - child.getY())) / mScrollSize;
             mCurrentPaddingSize = mMaxPaddingSize - (int)((mMaxPaddingSize * mProcScroll) / 100);
-            int tempTopMargin = mTopMarginMax - (int)((mTopMarginMax * mProcScroll) / 220);
-            Log.d(TAG, "Padding " + String.valueOf(mCurrentPaddingSize) + "View " + dependency.getPaddingTop());
+            int tempTopMargin = mTopMarginMax - (int)((mTopMarginMax * mProcScroll) / 210);
+//            Log.d(TAG, "Padding " + String.valueOf(mCurrentPaddingSize) + "View " + dependency.getPaddingTop());
             mNestedScrollParam.topMargin = tempTopMargin;
             dependency.setPadding(dependency.getPaddingLeft(), tempTopMargin, dependency.getPaddingRight(), dependency.getPaddingBottom());
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
