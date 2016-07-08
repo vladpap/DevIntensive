@@ -103,6 +103,7 @@
 
                     <ImageView
                         style="@style/icon.left"
+                        android:id="@+id/phone_call"
                         android:src="@drawable/ic_call_black_24dp"/>
 
                     <android.support.design.widget.TextInputLayout
@@ -113,11 +114,11 @@
                             style="@style/rowEditText"
                             android:hint="@string/mobile_phone"
                             android:inputType="phone"
-                            android:text="+7 966 095 55 38"/>
+                            android:text="+7 966 095 55 37"/>
                     </android.support.design.widget.TextInputLayout>
 
                     <ImageView
-                        android:id="@+id/call_msg_img"
+                        android:id="@+id/phone_sms"
                         style="@style/icon.right"
                         android:src="@drawable/ic_perm_phone_msg_black_24dp"/>
                 </LinearLayout>
@@ -133,6 +134,7 @@
 
                     <ImageView
                         style="@style/icon.left"
+                        android:id="@+id/send_mail"
                         android:src="@drawable/ic_local_post_office_black_24dp"/>
 
                     <android.support.design.widget.TextInputLayout
@@ -148,6 +150,7 @@
 
                     <ImageView
                         style="@style/icon.right"
+                        android:id="@+id/send_mail_2"
                         android:src="@drawable/ic_send_black_24dp"/>
                 </LinearLayout>
 
@@ -162,6 +165,7 @@
 
                     <ImageView
                         style="@style/icon.left"
+                        android:id="@+id/view_vk"
                         android:src="@drawable/vk"/>
 
                     <android.support.design.widget.TextInputLayout
@@ -177,6 +181,7 @@
 
                     <ImageView
                         style="@style/icon.right"
+                        android:id="@+id/view_vk_2"
                         android:src="@drawable/ic_remove_red_eye_black_24dp"/>
                 </LinearLayout>
 
@@ -191,6 +196,7 @@
 
                     <ImageView
                         style="@style/icon.left"
+                        android:id="@+id/view_git"
                         android:src="@drawable/github"/>
 
                     <android.support.design.widget.TextInputLayout
@@ -206,6 +212,7 @@
 
                     <ImageView
                         style="@style/icon.right"
+                        android:id="@+id/view_git_2"
                         android:src="@drawable/ic_remove_red_eye_black_24dp"/>
                 </LinearLayout>
 

@@ -1,5 +1,6 @@
 package com.softdesign.devintensive.ui.activities;
 
+import android.Manifest;
 import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
@@ -33,6 +34,7 @@ import android.support.v7.app.ActionBar;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -52,6 +54,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import butterknife.BindBitmap;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     private static final String TAG = ConstantManager.TAG_PREFIX + "Main Activity";
@@ -60,7 +66,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     private boolean mCurrentEditMode = false;
 
-    private ImageView mCallMsgImg;
+
+//    private ImageView mCallMsgImg;
     private CoordinatorLayout mCoordinatorLayout;
     private Toolbar mToolbar;
     private DrawerLayout mNavigationDrawer;
@@ -71,6 +78,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private CollapsingToolbarLayout mCollapsingToolbar;
     private AppBarLayout mAppBarLayout;
     private ImageView mProfileImageView;
+
+    private ImageView mPhoneCall;
+    private ImageView mPhoneSms;
+    private ImageView mSendEmail;
+    private ImageView mSendEmail_2;
+    private ImageView mViewVk;
+    private ImageView mViewVk_2;
+    private ImageView mViewGit;
+    private ImageView mViewGit_2;
 
     private List<EditText> mUserInfoViews;
 
@@ -88,7 +104,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
         mDataManager            = DataManager.getINSTANCE();
 
-        mCallMsgImg             = (ImageView)findViewById(R.id.call_msg_img);
+//        mCallMsgImg             = (ImageView)findViewById(R.id.phone_sms);
         mCoordinatorLayout      = (CoordinatorLayout) findViewById(R.id.main_coordinator_content);
         mToolbar                = (Toolbar) findViewById(R.id.toolbar);
         mNavigationDrawer       = (DrawerLayout) findViewById(R.id.navigation_drawer);
@@ -98,12 +114,23 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         mCollapsingToolbar      = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar_layout);
         mAppBarLayout           = (AppBarLayout) findViewById(R.id.app_bar_layout);
 
+
         mUserPhone = (EditText) findViewById(R.id.phoneNumber);
         mUserMail  = (EditText) findViewById(R.id.email);
         mUserVk    = (EditText) findViewById(R.id.vk);
         mUserGit   = (EditText) findViewById(R.id.repository);
         mUserAbout = (EditText) findViewById(R.id.about);
         mProfileImageView = (ImageView) findViewById(R.id.user_photo_img);
+
+        mPhoneCall = (ImageView) findViewById(R.id.phone_call);
+        mPhoneSms = (ImageView) findViewById(R.id.phone_sms);
+        mSendEmail = (ImageView) findViewById(R.id.send_mail);
+        mSendEmail_2 = (ImageView) findViewById(R.id.send_mail_2);
+        mViewVk = (ImageView) findViewById(R.id.view_vk);
+        mViewVk_2 = (ImageView) findViewById(R.id.view_vk_2);
+        mViewGit = (ImageView) findViewById(R.id.view_git);
+        mViewGit_2 = (ImageView) findViewById(R.id.view_git_2);
+
 
         mUserInfoViews = new ArrayList<>();
         mUserInfoViews.add(mUserPhone);
@@ -112,12 +139,19 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         mUserInfoViews.add(mUserGit);
         mUserInfoViews.add(mUserAbout);
 
-        for (EditText  aaa: mUserInfoViews) {
-//            Log.d(TAG, aaa.getText().toString());
-        }
+
 
         mFloatingActionButton.setOnClickListener(this);
         mProfilePlaceholder.setOnClickListener(this);
+
+        mPhoneCall.setOnClickListener(this);
+        mPhoneSms.setOnClickListener(this);
+        mSendEmail.setOnClickListener(this);
+        mSendEmail_2.setOnClickListener(this);
+        mViewVk.setOnClickListener(this);
+        mViewVk_2.setOnClickListener(this);
+        mViewGit.setOnClickListener(this);
+        mViewGit_2.setOnClickListener(this);
 
 
         setupToolbar();
@@ -127,7 +161,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 .load(mDataManager.getPreferenceManager().loadUserPhoto())
                 .into(mProfileImageView);
 
-//        List<String> testData = mDataManager.getPreferenceManager().loadUserProfileData();
 
 
         if (savedInstanceState == null) {
@@ -198,6 +231,25 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             case R.id.profile_placeholder:
                 showDialog(ConstantManager.LOAD_PROFILE_PHOTO);
                 break;
+            case R.id.phone_call:
+                callPhoneNumber(mUserPhone.getText().toString());
+                break;
+            case R.id.phone_sms:
+                sendSms(mUserPhone.getText().toString());
+                break;
+            case R.id.send_mail:
+            case R.id.send_mail_2:
+                sendEmail(mUserMail.getText().toString());
+                break;
+            case R.id.view_vk:
+            case R.id.view_vk_2:
+                openWebPage(mUserVk.getText().toString());
+                break;
+            case R.id.view_git:
+            case R.id.view_git_2:
+                openWebPage(mUserGit.getText().toString());
+                break;
+
         }
     }
 
@@ -226,10 +278,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
         uploadAvatar();
 
-//        Bitmap mbitmap = (Bitmap) ((BitmapDrawable) getResources().getDrawable(R.drawable.user_photo)).getBitmap();
-
-//        navImgView.setImageBitmap(croppedBitmap(squareCropBitmap(mbitmap), 400));
-//        navImgView.setImageBitmap(getCircularBitmap(mbitmap));
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -313,74 +361,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         mDataManager.getPreferenceManager().saveUserProfileData(userDate);
     }
 
-    public Bitmap croppedBitmap(Bitmap bmp, int radius) {
-        Bitmap sbmp;
-        if (bmp.getWidth() != radius || bmp.getHeight() != radius)
-            sbmp = Bitmap.createScaledBitmap(bmp, radius, radius, false);
-        else
-            sbmp = bmp;
-        Bitmap output = Bitmap.createBitmap(sbmp.getWidth(),
-                sbmp.getHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(output);
-
-        final int color = 0xffa19774;
-        final Paint paint = new Paint();
-        final Rect rect = new Rect(0, 0, sbmp.getWidth(), sbmp.getHeight());
-
-        paint.setAntiAlias(true);
-        paint.setFilterBitmap(true);
-        paint.setDither(true);
-        canvas.drawARGB(0, 0, 0, 0);
-        paint.setColor(Color.parseColor("#BAB399"));
-        canvas.drawCircle(sbmp.getWidth() / 2 + 0.7f, sbmp.getHeight() / 2 + 0.7f,
-                sbmp.getWidth() / 2 + 0.1f, paint);
-        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
-        canvas.drawBitmap(sbmp, rect, rect, paint);
-
-
-        return output;
-    }
-
-    public Bitmap squareCropBitmap(Bitmap bitmap) {
-        int width = bitmap.getWidth();
-        int height = bitmap.getHeight();
-        int crop = (width - height) / 2;
-        Bitmap cropImg = Bitmap.createBitmap(bitmap, crop, 0, height, height);
-        return cropImg;
-    }
-
-    public static Bitmap getCircularBitmap(Bitmap bitmap) {
-        Bitmap output;
-
-        if (bitmap.getWidth() > bitmap.getHeight()) {
-            output = Bitmap.createBitmap(bitmap.getHeight(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
-        } else {
-            output = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getWidth(), Bitmap.Config.ARGB_8888);
-        }
-
-        Canvas canvas = new Canvas(output);
-
-        final int color = 0xff424242;
-        final Paint paint = new Paint();
-        final Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
-
-        float r = 0;
-
-        if (bitmap.getWidth() > bitmap.getHeight()) {
-            r = bitmap.getHeight() / 2;
-        } else {
-            r = bitmap.getWidth() / 2;
-        }
-
-        paint.setAntiAlias(true);
-        canvas.drawARGB(0, 0, 0, 0);
-        paint.setColor(color);
-        canvas.drawCircle(r, r, r, paint);
-        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
-        canvas.drawBitmap(bitmap, rect, rect, paint);
-        return output;
-    }
-
     private void loadPhotoFromGallery() {
         Intent takeGalleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         takeGalleryIntent.setType("image/*");
@@ -405,7 +385,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             }
         } else {
             askPermissionCamera();
-//            viewSnakebarPermission();
         }
     }
 
@@ -421,11 +400,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     private void askPermissionCamera() {
         ArrayList<String> listPermission = new ArrayList<>();
-        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            listPermission.add(android.Manifest.permission.CAMERA);
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            listPermission.add(Manifest.permission.CAMERA);
         }
-        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            listPermission.add(android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            listPermission.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
         }
         String[] stringArray = listPermission.toArray(new String[listPermission.size()]);
         ActivityCompat.requestPermissions(this, stringArray, ConstantManager.CAMERA_REQUEST_PERMITION_CODE);
@@ -453,6 +432,26 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             }
 
         }   // end if CAMERA_REQUEST_PERMITION_CODE
+
+        if (requestCode == ConstantManager.SEND_SMS_REQUEST_PERMITION_CODE) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                sendSms(mUserPhone.getText().toString());
+            } else {
+                if (!ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.SEND_SMS)) {
+                    viewSnakebarPermission();
+                }
+            }
+        }
+
+        if (requestCode == ConstantManager.CALL_PHONE_REQUEST_PERMITION_CODE) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                callPhoneNumber(mUserPhone.getText().toString());
+            } else {
+                if (!ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CALL_PHONE)) {
+                    viewSnakebarPermission();
+                }
+            }
+        }
     }
 
     private void hideProfilePlaceholder() {
@@ -512,7 +511,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         String imageFileName = "JPEG_" + timeStamp + "_";
         File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
 
-        File image File.createTempFile(imageFileName, ".jpg", storageDir);
+        File image = File.createTempFile(imageFileName, ".jpg", storageDir);
 
         ContentValues values = new ContentValues();
         values.put(MediaStore.Images.Media.DATE_TAKEN, System.currentTimeMillis());
@@ -546,5 +545,45 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     public void openApplicationSetting() {
         Intent appSettingIntent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:" + getPackageName()));
         startActivityForResult(appSettingIntent, ConstantManager.PERMITION_REQUEST_SETTING_CODE);
+    }
+
+    private void openWebPage(String url) {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url.contains("http://") ? url : ("http://" + url)));
+        startActivity(browserIntent);
+    }
+
+    private void sendEmail(String email) {
+        Intent sendEmailIntent = new Intent(Intent.ACTION_SEND);
+        sendEmailIntent.setType("text/plain");
+        sendEmailIntent.putExtra(Intent.EXTRA_EMAIL, new String[] {email});
+        sendEmailIntent.putExtra(Intent.EXTRA_SUBJECT, "Content subject");
+        sendEmailIntent.putExtra(Intent.EXTRA_TEXT, "Content");
+        startActivity(Intent.createChooser(sendEmailIntent, "Отправка письма..."));
+    }
+
+    private void callPhoneNumber(String phoneNumber) {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
+            Intent dialIntent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + correctPhoneNumberForSendSmsOrCall(phoneNumber)));
+            startActivity(dialIntent);
+        } else {
+            ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.CALL_PHONE} , ConstantManager.CALL_PHONE_REQUEST_PERMITION_CODE);
+        }
+    }
+
+    private void sendSms(String phoneNumber) {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED) {
+            Intent sendSmsIntent = new Intent(Intent.ACTION_VIEW);
+            sendSmsIntent.putExtra("address", correctPhoneNumberForSendSmsOrCall(phoneNumber));
+            sendSmsIntent.putExtra("sms_body", "sms text");
+            sendSmsIntent.setType("vnd.android-dir/mms-sms");
+            startActivity(sendSmsIntent);
+        } else {
+            ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.SEND_SMS} , ConstantManager.SEND_SMS_REQUEST_PERMITION_CODE);
+        }
+    }
+    private String correctPhoneNumberForSendSmsOrCall(String phoneNum) {
+        return phoneNum.replace(" ", "")
+                .replaceAll("\\(", "")
+                .replaceAll("\\)", "");
     }
 }
