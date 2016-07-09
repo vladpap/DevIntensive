@@ -176,7 +176,7 @@
                             style="@style/rowEditText"
                             android:hint="@string/vk"
                             android:inputType="text"
-                            android:text="https://vk.com/id125528752"/>
+                            android:text="vk.com/id125528752"/>
                     </android.support.design.widget.TextInputLayout>
 
                     <ImageView

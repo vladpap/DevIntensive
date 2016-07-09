@@ -29,6 +29,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -45,6 +47,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import butterknife.BindBitmap;
 import butterknife.BindView;
@@ -159,9 +163,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 //            активити запускается впервые
         } else {
             mCurrentEditMode = savedInstanceState.getBoolean(ConstantManager.EDIT_MODE_KEY);
+            if (mCurrentEditMode) {
+                changeEditMode(mCurrentEditMode);
+            }
         }
-
-        changeEditMode(mCurrentEditMode);
 
     }
 
@@ -322,6 +327,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
      * @param mode если true режим редактирования, если false режим просмотра
      */
     private void changeEditMode(boolean mode) {
+        InputMethodManager inputManager = (InputMethodManager)
+                getSystemService(this.INPUT_METHOD_SERVICE);
+
+        inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
+                InputMethodManager.HIDE_NOT_ALWAYS);
+
+        if (!mode && !checkedValidateField()) {
+            return;
+        }
         mUserPhone.requestFocus();
         for (EditText userValue : mUserInfoViews) {
             userValue.setEnabled(mode);
@@ -656,4 +670,55 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
         startActivityForResult(loginIntent, ConstantManager.REQUEST_LOGIN_CODE);
     }
+
+    private boolean checkedValidateField() {
+        if (!checkPhoneNumberValidator()) {
+            showSnackBar("Не коректный номер телефона");
+            return false;
+        } else if (!checkEmailValidator()) {
+            showSnackBar("Не коректный email");
+            return false;
+        } else if (!checkVkValidator()) {
+            showSnackBar("Не коректный адрес Vk");
+            return false;
+        } else if (!checkGitValidator()) {
+            showSnackBar("Не коректный адрес Git");
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    private boolean checkEmailValidator() {
+        return checkValidator(mUserMail.getText().toString(), "^[a-z0-9_-]{3,}@[a-z0-9_-]{2,}\\.[a-z0-9]{2}$");
+    }
+
+    private boolean checkPhoneNumberValidator() {
+        return checkValidator(mUserPhone.getText().toString(), "^((8|\\+7)[\\- ]?)?(\\(?\\d{3}\\)?[\\- ]?)?[\\d\\- ]{7,10}$");
+    }
+
+    private boolean checkVkValidator() {
+        String vk = mUserVk.getText().toString();
+        if (vk.contains("http://" )) {
+            vk = vk.replaceAll("http://", "");
+            mUserVk.setText(vk);
+        }
+        return checkValidator(vk, "^vk\\.com\\/\\S+$");
+    }
+
+    private boolean checkGitValidator() {
+        String git = mUserGit.getText().toString();
+        if (git.contains("http://")) {
+            git = git.replaceAll("http://", "");
+            mUserVk.setText(git);
+        }
+        return checkValidator(git, "^github\\.com\\/\\S+$");
+    }
+
+    private boolean checkValidator(String stringValidate, String regex) {
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(stringValidate);
+        return matcher.matches();
+    }
+
 }
