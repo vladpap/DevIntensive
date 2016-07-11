@@ -26,14 +26,50 @@
                 android:layout_height="wrap_content"
                 app:contentScrim="@color/color_primary"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed">
-
-                <ImageView
-                    android:id="@+id/user_photo_img"
+                
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/profile_image_size"
-                    android:fitsSystemWindows="true"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/user_photo"/>
+                    android:fitsSystemWindows="true">
+
+                    <ImageView
+                        android:id="@+id/user_photo_img"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/profile_image_size"
+                        android:fitsSystemWindows="true"
+                        android:scaleType="centerCrop"
+                        android:background="@color/color_primary_dark"
+                        android:src="@drawable/user_bg"/>
+
+                    <RelativeLayout
+                        android:id="@+id/profile_placeholder"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/color_trancporent_85"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/user_profile.placeholder.image"
+                            android:textColor="@color/color_white"
+                            android:fontFamily="sans-serif-medium"
+                            android:layout_centerHorizontal="true"
+                            android:layout_above="@+id/image_placeholder"
+                            android:layout_marginBottom="@dimen/spacing_small_8"/>
+                        <ImageView
+                            android:id="@+id/image_placeholder"
+                            android:layout_width="@dimen/placeholder_photo_size_90"
+                            android:layout_height="@dimen/placeholder_photo_size_90"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/add_a_photo_48px"
+                            android:layout_centerHorizontal="true"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginBottom="@dimen/spacing_large_56"/>
+                    </RelativeLayout>
+                </FrameLayout>
+
+
 
                 <android.support.v7.widget.Toolbar
                     android:id="@+id/toolbar"
@@ -67,6 +103,7 @@
 
                     <ImageView
                         style="@style/icon.left"
+                        android:id="@+id/phone_call"
                         android:src="@drawable/ic_call_black_24dp"/>
 
                     <android.support.design.widget.TextInputLayout
@@ -77,11 +114,11 @@
                             style="@style/rowEditText"
                             android:hint="@string/mobile_phone"
                             android:inputType="phone"
-                            android:text="+7 966 095 55 38"/>
+                            android:text="+7 966 095 55 37"/>
                     </android.support.design.widget.TextInputLayout>
 
                     <ImageView
-                        android:id="@+id/call_msg_img"
+                        android:id="@+id/phone_sms"
                         style="@style/icon.right"
                         android:src="@drawable/ic_perm_phone_msg_black_24dp"/>
                 </LinearLayout>
@@ -97,6 +134,7 @@
 
                     <ImageView
                         style="@style/icon.left"
+                        android:id="@+id/send_mail"
                         android:src="@drawable/ic_local_post_office_black_24dp"/>
 
                     <android.support.design.widget.TextInputLayout
@@ -112,6 +150,7 @@
 
                     <ImageView
                         style="@style/icon.right"
+                        android:id="@+id/send_mail_2"
                         android:src="@drawable/ic_send_black_24dp"/>
                 </LinearLayout>
 
@@ -126,6 +165,7 @@
 
                     <ImageView
                         style="@style/icon.left"
+                        android:id="@+id/view_vk"
                         android:src="@drawable/vk"/>
 
                     <android.support.design.widget.TextInputLayout
@@ -136,11 +176,12 @@
                             style="@style/rowEditText"
                             android:hint="@string/vk"
                             android:inputType="text"
-                            android:text="https://vk.com/id125528752"/>
+                            android:text="vk.com/id125528752"/>
                     </android.support.design.widget.TextInputLayout>
 
                     <ImageView
                         style="@style/icon.right"
+                        android:id="@+id/view_vk_2"
                         android:src="@drawable/ic_remove_red_eye_black_24dp"/>
                 </LinearLayout>
 
@@ -155,6 +196,7 @@
 
                     <ImageView
                         style="@style/icon.left"
+                        android:id="@+id/view_git"
                         android:src="@drawable/github"/>
 
                     <android.support.design.widget.TextInputLayout
@@ -170,6 +212,7 @@
 
                     <ImageView
                         style="@style/icon.right"
+                        android:id="@+id/view_git_2"
                         android:src="@drawable/ic_remove_red_eye_black_24dp"/>
                 </LinearLayout>
 
@@ -195,7 +238,7 @@
                             style="@style/rowEditText"
                             android:hint="@string/about"
                             android:inputType="textMultiLine"
-                            android:text="Я буду сильным всем назло, хоть будет трудно улыбаться. Жизнь не закончилась еще, жизнь начинает продолжаться! Наверное единственное, что очень не нравится - разбираться в чужом коде, исправлять чужие ошибки, так как, как правило, неработающий (работающий неправильно) код, который приходится исправлять - недоделанный, плохой код, написанный коряво или, того хуже, вообще &quot;говнокод&quot;. В этих случаях так и просится сказать цитату из анекдота: &quot;Чукча не читатель, Чукча - писатель!&quot;. Вообще я считаю, разработчик, программист, пишущий любую систему или программу должен представить, что пользователи, которые будут пользоваться его разработкой, а тем более люди, которые потом будут сопровождать его разработку - психопаты, страдающие маниакальной стратью к насилию и жестокости, и которые прекрасно знаю, где проживает этот самый разработчик и где его можно встретить, чтобы отблагодарить по достоинству. Все мы делаем ошибки, не без этого, но у некоторых это просто паталогия какая-то."/>
+                            android:text="@string/about_text"/>
                     </android.support.design.widget.TextInputLayout>
 
                     <ImageView
@@ -207,14 +250,13 @@
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>
 
-
         <!-- HEADER -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/spacing_medial_24"
             android:paddingBottom="@dimen/spacing_medial_24"
-            android:background="@color/color_dark_grey"
+            android:background="@color/color_grey"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             app:layout_anchor="@id/nested_scroll_view"

@@ -11,4 +11,10 @@
             android:icon="@drawable/ic_group_black_24dp"
             android:title="Команда"/>
     </group>
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/user_profile_login"
+            android:icon="@drawable/ic_input_black_24dp"
+            android:title="Вход"/>
+    </group>
 </menu>
