@@ -17,4 +17,13 @@
     <string name="user_profile_chose_message">выберите фото</string>
     <string name="ask_permission_snakebar">Для корректной работы приложения необходимо дать требуемые разрешения</string>
     <string name="allow">Разрешить</string>
+    <string name="no_correct_phone_number">Не коректный номер телефона</string>
+    <string name="no_correct_email">Не коректный email</string>
+    <string name="no_correct_vk">Не коректный адрес Vk</string>
+    <string name="no_correct_git">Не коректный адрес Git</string>
+    <string name="login_enter">ВОЙТИ</string>
+    <string name="e_mail_login">E-mail</string>
+    <string name="were_passwprd_login">Забыли пароль?</string>
+    <string name="login_enter_btn">ВОЙТИ</string>
+    <string name="password_login">Пароль</string>
 </resources>

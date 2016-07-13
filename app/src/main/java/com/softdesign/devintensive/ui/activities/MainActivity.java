@@ -26,14 +26,13 @@ import android.support.v7.app.ActionBar;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.softdesign.devintensive.R;
 import com.softdesign.devintensive.data.managers.DataManager;
@@ -49,10 +48,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import butterknife.BindBitmap;
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
 
@@ -74,6 +69,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private CollapsingToolbarLayout mCollapsingToolbar;
     private AppBarLayout mAppBarLayout;
     private ImageView mProfileImageView;
+    private TextView mUserValueRaiting, mUserValueCodeLines, mUserValueProject;
+    private List<TextView> mUserValueViews;
 
     private ImageView mPhoneCall;
     private ImageView mPhoneSms;
@@ -98,7 +95,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         setContentView(R.layout.activity_main);
 //        Log.d(TAG, "onCreate");
 
-        mDataManager            = DataManager.getINSTANCE();
+        mDataManager            = DataManager.getInstance();
 
 //        mCallMsgImg             = (ImageView)findViewById(R.id.phone_sms);
         mCoordinatorLayout      = (CoordinatorLayout) findViewById(R.id.main_coordinator_content);
@@ -127,6 +124,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         mViewGit = (ImageView) findViewById(R.id.view_git);
         mViewGit_2 = (ImageView) findViewById(R.id.view_git_2);
 
+        mUserValueRaiting = (TextView) findViewById(R.id.count_rating);
+        mUserValueCodeLines = (TextView) findViewById(R.id.count_code_line);
+        mUserValueProject = (TextView) findViewById(R.id.count_projects);
 
         mUserInfoViews = new ArrayList<>();
         mUserInfoViews.add(mUserPhone);
@@ -135,7 +135,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         mUserInfoViews.add(mUserGit);
         mUserInfoViews.add(mUserAbout);
 
-
+        mUserValueViews = new ArrayList<>();
+        mUserValueViews.add(mUserValueRaiting);
+        mUserValueViews.add(mUserValueCodeLines);
+        mUserValueViews.add(mUserValueProject);
 
         mFloatingActionButton.setOnClickListener(this);
         mProfilePlaceholder.setOnClickListener(this);
@@ -152,11 +155,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
         setupToolbar();
         setupDrawer();
-        loadUserInfoValue();
+        initUserField();
+        initUseInfoValue();
+
         Picasso.with(this)
                 .load(mDataManager.getPreferenceManager().loadUserPhoto())
                 .into(mProfileImageView);
 
+        this.setTitle(mDataManager.getPreferenceManager().loadUserName());
 
 
         if (savedInstanceState == null) {
@@ -201,7 +207,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     protected void onPause() {
         super.onPause();
 //        Log.d(TAG, "onPause");
-        saveUserInfoValue();
+        saveUserField();
     }
 
     @Override
@@ -274,15 +280,18 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
 
         uploadAvatar();
+        TextView name, email;
 
+        name = (TextView) navigationView.getHeaderView(0).findViewById(R.id.user_name_text_nav);
+        email = (TextView) navigationView.getHeaderView(0).findViewById(R.id.user_email_text_nav);
+
+        name.setText(mDataManager.getPreferenceManager().loadUserName());
+        email.setText(mUserMail.getText());
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
                 showSnackBar(item.getTitle().toString());
-                if (item.getItemId() == R.id.user_profile_login) {
-                    startLoginActivity();
-                }
                 item.setChecked(true);
                 mNavigationDrawer.closeDrawer(GravityCompat.START);
                 return false;
@@ -311,10 +320,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                     mSelectedImage = Uri.fromFile(mPhotoFile);
                     insertProfileImage(mSelectedImage);
                 }
-                break;
-            case ConstantManager.REQUEST_LOGIN_CODE:
-                // TODO: 08.07.16 Обработка реквеста логин активити
-                showSnackBar(data.getStringExtra(ConstantManager.LOGIN_KEY) + " : " + resultCode);
                 break;
         }
     }
@@ -347,7 +352,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             mCollapsingToolbar.setExpandedTitleColor(getResources().getColor(R.color.color_white));
             unlockToolbar();
             hideProfilePlaceholder();
-            saveUserInfoValue();
+            saveUserField();
             uploadAvatar();
         } else {
             mUserPhone.requestFocus();
@@ -362,7 +367,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     /**
      * Извлечение данных из PreferenceManager
      */
-    private void loadUserInfoValue() {
+    private void initUserField() {
         List<String> userData = mDataManager.getPreferenceManager().loadUserProfileData();
         if (userData == null) {
             return;
@@ -375,7 +380,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     /**
      * Сохранение данных в PreferenceManager
      */
-    private void saveUserInfoValue() {
+    private void saveUserField() {
         List<String> userDate = new ArrayList<>();
         for (EditText userFieldView : mUserInfoViews) {
             userDate.add(userFieldView.getText().toString());
@@ -387,6 +392,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         Intent takeGalleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         takeGalleryIntent.setType("image/*");
         startActivityForResult(Intent.createChooser(takeGalleryIntent, getString(R.string.user_profile_chose_message)), ConstantManager.REQUEST_GALLERY_PICTURE);
+    }
+
+    private void initUseInfoValue() {
+        List<String> userData = mDataManager.getPreferenceManager().loadUserProfileValues();
+        for (int i = 0; i < userData.size(); i++) {
+            mUserValueViews.get(i).setText(userData.get(i));
+        }
     }
 
     private void loadPhotoFromCamera() {
@@ -586,7 +598,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
         ImageView navImgView = (ImageView) navigationView.getHeaderView(0).findViewById(R.id.user_photo_drawer_img_nav);
         Picasso.with(this)
-                .load(mDataManager.getPreferenceManager().loadUserPhoto())
+                .load(mDataManager.getPreferenceManager().loadAvatarPhoto())
                 .resize(400,400)
                 .centerCrop()
                 .transform(new CircleTransform())
@@ -673,16 +685,16 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     private boolean checkedValidateField() {
         if (!checkPhoneNumberValidator()) {
-            showSnackBar("Не коректный номер телефона");
+            showSnackBar(getString(R.string.no_correct_phone_number));
             return false;
         } else if (!checkEmailValidator()) {
-            showSnackBar("Не коректный email");
+            showSnackBar(getString(R.string.no_correct_email));
             return false;
         } else if (!checkVkValidator()) {
-            showSnackBar("Не коректный адрес Vk");
+            showSnackBar(getString(R.string.no_correct_vk));
             return false;
         } else if (!checkGitValidator()) {
-            showSnackBar("Не коректный адрес Git");
+            showSnackBar(getString(R.string.no_correct_git));
             return false;
         } else {
             return true;
@@ -699,8 +711,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     private boolean checkVkValidator() {
         String vk = mUserVk.getText().toString();
-        if (vk.contains("http://" )) {
-            vk = vk.replaceAll("http://", "");
+        if (vk.contains("https://" )) {
+            vk = vk.replaceAll("https://", "");
             mUserVk.setText(vk);
         }
         return checkValidator(vk, "^vk\\.com\\/\\S+$");
@@ -708,8 +720,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     private boolean checkGitValidator() {
         String git = mUserGit.getText().toString();
-        if (git.contains("http://")) {
-            git = git.replaceAll("http://", "");
+        if (git.contains("https://")) {
+            git = git.replaceAll("https://", "");
             mUserVk.setText(git);
         }
         return checkValidator(git, "^github\\.com\\/\\S+$");

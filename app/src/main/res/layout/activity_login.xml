@@ -1,98 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/frame_layout_login"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_login_coordinator_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/login_bg"
-    android:orientation="vertical">
+    tools:ignore="contentDescription">
 
-    <LinearLayout
+    <FrameLayout
+        android:id="@+id/frame_layout_login"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginLeft="@dimen/spacing_larger_72"
-        android:layout_marginRight="@dimen/spacing_larger_72"
-        android:background="@drawable/login_window"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <LinearLayout
+        <ImageView
             android:layout_width="match_parent"
-            android:layout_height="@dimen/size_small_24"
-            android:orientation="horizontal"
-            android:layout_marginTop="@dimen/size_small_24">
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/login_bg"/>
 
-            <View
-                android:layout_width="4dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
-                android:background="@color/color_login_red"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-condenced-medium"
-                android:text="ВОЙТИ"
-                android:textColor="@color/color_login_red"
-                android:textSize="@dimen/font_large_22"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <android.support.v7.widget.CardView
+            android:layout_width="240dp"
             android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/size_small_24"
-            android:paddingRight="@dimen/size_small_24"
-            android:paddingBottom="@dimen/size_small_24"
-            android:orientation="vertical">
+            android:layout_gravity="center"
+            app:cardBackgroundColor="@color/color_white"
+            app:cardCornerRadius="2dp"
+            app:cardElevation="8dp">
 
-            <android.support.design.widget.TextInputLayout
-                style="@style/rowTextInputLayoutLogin">
-
-                <EditText
-                    android:id="@+id/email_logon"
-                    style="@style/rowEditTextLogin"
-                    android:hint="E-mail"
-                    android:inputType="textEmailAddress"
-                    android:text="Softdesign@mail.ru"/>
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                style="@style/rowTextInputLayoutLogin">
-
-                <EditText
-                    android:id="@+id/email_logon"
-                    style="@style/rowEditTextLogin"
-                    android:hint="Пароль"
-                    android:inputType="textPassword"/>
-            </android.support.design.widget.TextInputLayout>
-
-            <View
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/size_small_24"/>
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-            <Button
-                android:id="@+id/login_btn"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/spacing_medium_40"
-                android:layout_gravity="center"
-                android:layout_marginBottom="@dimen/spacing_normal_16"
-                android:layout_marginLeft="@dimen/spacing_medial_24"
-                android:layout_marginRight="@dimen/spacing_medial_24"
-                android:background="@drawable/login_button"
-                android:fontFamily="sans-serif"
-                android:text="ВОЙТИ"
-                android:textColor="@color/color_white"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_small_24"
+                    android:layout_marginTop="@dimen/size_small_24"
+                    android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-condensed"
-                android:gravity="center"
-                android:text="Забыли пароль?"
-                android:textColor="@color/color_grey"
-                android:textSize="@dimen/font_small_12"/>
+                    <View
+                        android:layout_width="4dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:background="@color/color_login_red"/>
 
-        </LinearLayout>
-    </LinearLayout>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-condenced-medium"
+                        android:text="@string/login_enter"
+                        android:textColor="@color/color_login_red"
+                        android:textSize="@dimen/font_large_22"/>
+                </LinearLayout>
 
-</FrameLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingBottom="@dimen/size_small_24"
+                    android:paddingLeft="@dimen/size_small_24"
+                    android:paddingRight="@dimen/size_small_24">
+
+                    <android.support.design.widget.TextInputLayout
+                        style="@style/rowTextInputLayoutLogin">
+
+                        <EditText
+                            android:id="@+id/email_logon"
+                            style="@style/rowEditTextLogin"
+                            android:hint="@string/e_mail_login"
+                            android:inputType="textEmailAddress"/>
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        style="@style/rowTextInputLayoutLogin">
+
+                        <EditText
+                            android:id="@+id/password_logon"
+                            style="@style/rowEditTextLogin"
+                            android:hint="@string/password_login"
+                            android:inputType="textPassword"/>
+                    </android.support.design.widget.TextInputLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/size_small_24"/>
+
+                    <Button
+                        android:id="@+id/login_btn"
+                        style="@style/AppTheme.Button.Red"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginBottom="@dimen/spacing_normal_16"
+                        android:fontFamily="sans-serif"
+                        android:minWidth="126dp"
+                        android:textAllCaps="true"
+                        android:text="@string/login_enter_btn"
+                        app:theme="@style/AppTheme.Button.Red"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/were_password"
+                        android:fontFamily="sans-serif-condensed"
+                        android:gravity="center"
+                        android:text="@string/were_passwprd_login"
+                        android:textColor="@color/color_grey"
+                        android:textSize="@dimen/font_small_12"/>
+
+                </LinearLayout>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+    </FrameLayout>
+</android.support.design.widget.CoordinatorLayout>

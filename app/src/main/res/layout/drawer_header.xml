@@ -28,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-medium"
-            android:text="Владимир Папин"
+            android:text="Abcdefg"
             android:textColor="@color/color_white"
             android:textSize="14sp"/>
 
@@ -37,7 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif"
-            android:text="vladpap@mail.ru"
+            android:text="12345"
             android:textColor="@color/color_white"
             android:textSize="14sp"/>
 
