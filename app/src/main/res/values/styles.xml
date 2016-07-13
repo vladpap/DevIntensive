@@ -126,4 +126,8 @@
         <item name="android:textSize">@dimen/font_normal_15</item>
         <item name="android:textColorHint">@color/color_grey</item>
     </style>
+    <style name="AppTheme.Button.Red" parent="Base.Widget.AppCompat.Button">
+        <item name="android:colorButtonNormal">@color/color_login_red</item>
+        <item name="android:textColor">@color/color_white</item>
+    </style>
 </resources>
