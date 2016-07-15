@@ -42,6 +42,10 @@ public class PreferenceManager {
         editor.apply();
     }
 
+    public String getFieldFromKey(String key) {
+        return mSharedPreferences.getString(key, "");
+    }
+
     public List<String> loadUserProfileData() {
         List<String> userField = new ArrayList<>();
         for (int i = 0; i < USER_FIELDS.length; i++) {

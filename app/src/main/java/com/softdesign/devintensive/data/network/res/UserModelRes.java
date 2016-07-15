@@ -64,6 +64,10 @@ public class UserModelRes {
             return profileValues;
         }
 
+        public String getFullName() {
+            return firstName + " " + secondName;
+        }
+
         public String getFirstName() {
             return firstName;
         }
@@ -148,6 +152,9 @@ public class UserModelRes {
         }
 
         public String getPhoto() {
+            if (photo.isEmpty()) {
+                return null;
+            }
             return photo;
         }
 

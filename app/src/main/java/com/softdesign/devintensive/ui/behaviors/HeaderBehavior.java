@@ -1,12 +1,9 @@
-package com.softdesign.devintensive.ui.view.behaviors;
+package com.softdesign.devintensive.ui.behaviors;
 
 import android.content.Context;
 import android.os.Build;
-import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.design.widget.CoordinatorLayout;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 

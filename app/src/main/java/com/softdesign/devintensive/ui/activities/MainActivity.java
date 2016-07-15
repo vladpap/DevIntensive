@@ -291,7 +291,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
-                showSnackBar(item.getTitle().toString());
+                if (item.getTitle().toString().equals("Команда")) {
+                    Intent profileIntent = new Intent(MainActivity.this, UserListActivity.class);
+                    startActivity(profileIntent);
+                }
                 item.setChecked(true);
                 mNavigationDrawer.closeDrawer(GravityCompat.START);
                 return false;
