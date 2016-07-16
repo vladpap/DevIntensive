@@ -1,5 +1,6 @@
 package com.softdesign.devintensive.ui.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.NavigationView;
@@ -7,12 +8,13 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -33,22 +35,39 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class UserListActivity extends AppCompatActivity {
+public class UserListActivity extends BaseActivity implements SearchView.OnQueryTextListener {
 
     private static final String TAG = ConstantManager.TAG_PREFIX + " UserListActivity";
     private CoordinatorLayout mCoordinatorLayout;
     private Toolbar mToolbar;
     private DrawerLayout mNavigationDrawer;
     private RecyclerView mRecyclerView;
+    private SearchView mSearchView;
+    private MenuItem searchMenuItem;
+    private String mSearchText = "";
+    private boolean mSearchTextSubmit = false;
 
     private DataManager mDataManager;
     private UsersAdapter mUsersAdapter;
     private ArrayList<UserListRes.Datum> mUsers;
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        searchMenuItem = menu.findItem(R.id.action_search);
+        mSearchView = (SearchView) searchMenuItem.getActionView();
+
+        mSearchView.setOnQueryTextListener(this);
+//        return super.onCreateOptionsMenu(menu);
+        return true;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
-//        Log.e(TAG, mDataManager.getPreferenceManager().getUserId());
+
         super.onCreate(savedInstanceState);
+
+        this.setTitle(getString(R.string.team));
         setContentView(R.layout.activity_user_list);
 
         mDataManager = DataManager.getInstance();
@@ -77,8 +96,10 @@ public class UserListActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
     private void loadUsers() {
-        this.setTitle(getString(R.string.team));
+        showProgress();
+
         Call<UserListRes> call = mDataManager.getUserList();
 
         call.enqueue(new Callback<UserListRes>() {
@@ -86,7 +107,19 @@ public class UserListActivity extends AppCompatActivity {
             public void onResponse(Call<UserListRes> call, Response<UserListRes> response) {
 
                 try {
-                    mUsers = (ArrayList<UserListRes.Datum>) response.body().getData();
+                    if (mSearchText.isEmpty()) {
+                        mUsers = (ArrayList<UserListRes.Datum>) response.body().getData();
+                    } else {
+                        ArrayList<UserListRes.Datum> usersTemp;
+                        mUsers.clear();
+                        usersTemp = (ArrayList<UserListRes.Datum>) response.body().getData();
+                        for (UserListRes.Datum datum : usersTemp) {
+                            if (datum.getFullName().toUpperCase().contains(mSearchText.toUpperCase())) {
+                                mUsers.add(datum);
+                            }
+                        }
+                    }
+
                     mUsersAdapter = new UsersAdapter(mUsers, new UsersAdapter.UserViewHolder.CustomClickListener() {
                         @Override
                         public void onClickUserMore(int position) {
@@ -102,7 +135,8 @@ public class UserListActivity extends AppCompatActivity {
                     Log.e(TAG, e.toString());
                     showSnackBar("Что не так");
                 }
-
+                hideProgress();
+                showSnackBar("Found " + mUsers.size() + " developers");
             }
 
             @Override
@@ -154,5 +188,23 @@ public class UserListActivity extends AppCompatActivity {
             actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        mSearchTextSubmit = true;
+        loadUsers();
+        mSearchView.clearFocus();
+        return true;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        mSearchText = newText;
+        if (mSearchTextSubmit && newText.isEmpty()) {
+            mSearchTextSubmit = false;
+            loadUsers();
+        }
+        return true;
     }
 }
