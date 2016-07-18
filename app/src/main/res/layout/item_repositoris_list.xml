@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/size_large_72">
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/size_large_72">
+
+        <EditText
+            android:id="@+id/repository_user_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/fontCondenset"
+            android:enabled="false"
+            android:background="@android:color/transparent"
+            android:textColor="@color/color_black"
+            android:textColorHint="@color/color_grey"
+            android:focusable="false"
+            android:hint="@string/repository"
+            android:inputType="text"
+            android:text="github.com/vladpap/DevIntensive"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <ImageView
+        style="@style/icon.right"
+        android:id="@+id/view_git_2_user"
+        android:src="@drawable/ic_remove_red_eye_black_24dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"/>
+
+</RelativeLayout>

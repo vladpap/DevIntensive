@@ -1,39 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/navigation_drawer"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.activities.MainActivity">
 
     <android.support.design.widget.CoordinatorLayout
-        android:id="@+id/main_coordinator_content"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/main_coordinator_content_user"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <android.support.design.widget.AppBarLayout
-            android:id="@+id/app_bar_layout"
+            android:id="@+id/app_bar_layout_user"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fitsSystemWindows="true"
             android:theme="@style/AppTheme.AppBarOverlay">
 
             <android.support.design.widget.CollapsingToolbarLayout
-                android:id="@+id/collapsing_toolbar_layout"
+                android:id="@+id/collapsing_toolbar_layout_user"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:contentScrim="@color/color_primary"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed">
-                
+
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/profile_image_size"
                     android:fitsSystemWindows="true">
 
                     <ImageView
-                        android:id="@+id/user_photo_img"
+                        android:id="@+id/user_photo_img_user"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/profile_image_size"
                         android:fitsSystemWindows="true"
@@ -41,38 +35,12 @@
                         android:background="@color/color_primary_dark"
                         android:src="@drawable/user_bg"/>
 
-                    <RelativeLayout
-                        android:id="@+id/profile_placeholder"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@color/color_trancporent_85"
-                        android:visibility="gone">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/user_profile.placeholder.image"
-                            android:textColor="@color/color_white"
-                            android:fontFamily="sans-serif-medium"
-                            android:layout_centerHorizontal="true"
-                            android:layout_above="@+id/image_placeholder"
-                            android:layout_marginBottom="@dimen/spacing_small_8"/>
-                        <ImageView
-                            android:id="@+id/image_placeholder"
-                            android:layout_width="@dimen/placeholder_photo_size_90"
-                            android:layout_height="@dimen/placeholder_photo_size_90"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/add_a_photo_48px"
-                            android:layout_centerHorizontal="true"
-                            android:layout_alignParentBottom="true"
-                            android:layout_marginBottom="@dimen/spacing_large_56"/>
-                    </RelativeLayout>
                 </FrameLayout>
 
 
 
                 <android.support.v7.widget.Toolbar
-                    android:id="@+id/toolbar"
+                    android:id="@+id/toolbar_user"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     android:theme="@style/AppTheme.PopupOverlay"
@@ -83,7 +51,7 @@
 
 
         <android.support.v4.widget.NestedScrollView
-            android:id="@+id/nested_scroll_view"
+            android:id="@+id/nested_scroll_view_user"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             style="@style/nested_scroll_view"
@@ -97,20 +65,20 @@
 
 
                 <!-- Phone number row -->
-
+<!--
                 <LinearLayout
                     style="@style/rowContayner">
 
                     <ImageView
                         style="@style/icon.left"
-                        android:id="@+id/phone_call"
+                        android:id="@+id/phone_call_user"
                         android:src="@drawable/ic_call_black_24dp"/>
 
                     <android.support.design.widget.TextInputLayout
                         style="@style/rowTextInputLayout">
 
                         <EditText
-                            android:id="@+id/phoneNumber"
+                            android:id="@+id/phoneNumber_user"
                             style="@style/rowEditText"
                             android:hint="@string/mobile_phone"
                             android:inputType="phone"
@@ -118,30 +86,30 @@
                     </android.support.design.widget.TextInputLayout>
 
                     <ImageView
-                        android:id="@+id/phone_sms"
+                        android:id="@+id/phone_sms_user"
                         style="@style/icon.right"
                         android:src="@drawable/ic_perm_phone_msg_black_24dp"/>
                 </LinearLayout>
-
+-->
                 <!-- END phone number row -->
 
-                <View style="@style/horizontalLine"/>
+                <!--<View style="@style/horizontalLine"/>-->
 
                 <!-- Email row -->
-
+<!--
                 <LinearLayout
                     style="@style/rowContayner">
 
                     <ImageView
                         style="@style/icon.left"
-                        android:id="@+id/send_mail"
+                        android:id="@+id/send_mail_user"
                         android:src="@drawable/ic_local_post_office_black_24dp"/>
 
                     <android.support.design.widget.TextInputLayout
                         style="@style/rowTextInputLayout">
 
                         <EditText
-                            android:id="@+id/email"
+                            android:id="@+id/email_user"
                             style="@style/rowEditText"
                             android:hint="@string/email"
                             android:inputType="textEmailAddress"
@@ -150,29 +118,29 @@
 
                     <ImageView
                         style="@style/icon.right"
-                        android:id="@+id/send_mail_2"
+                        android:id="@+id/send_mail_2_user"
                         android:src="@drawable/ic_send_black_24dp"/>
                 </LinearLayout>
-
+-->
                 <!-- End email row -->
 
-                <View style="@style/horizontalLine"/>
+                <!--<View style="@style/horizontalLine"/>-->
 
                 <!-- vk row -->
-
+<!--
                 <LinearLayout
                     style="@style/rowContayner">
 
                     <ImageView
                         style="@style/icon.left"
-                        android:id="@+id/view_vk"
+                        android:id="@+id/view_vk_user"
                         android:src="@drawable/vk"/>
 
                     <android.support.design.widget.TextInputLayout
                         style="@style/rowTextInputLayout">
 
                         <EditText
-                            android:id="@+id/vk"
+                            android:id="@+id/vk_user"
                             style="@style/rowEditText"
                             android:hint="@string/vk"
                             android:inputType="text"
@@ -181,13 +149,13 @@
 
                     <ImageView
                         style="@style/icon.right"
-                        android:id="@+id/view_vk_2"
+                        android:id="@+id/view_vk_2_user"
                         android:src="@drawable/ic_remove_red_eye_black_24dp"/>
                 </LinearLayout>
-
+-->
                 <!-- End vk row -->
 
-                <View style="@style/horizontalLine"/>
+                <!--<View style="@style/horizontalLine"/>-->
 
                 <!-- github row -->
 
@@ -196,24 +164,15 @@
 
                     <ImageView
                         style="@style/icon.left"
-                        android:id="@+id/view_git"
+                        android:id="@+id/view_git_user"
                         android:src="@drawable/github"/>
 
-                    <android.support.design.widget.TextInputLayout
-                        style="@style/rowTextInputLayout">
+                    <ListView
+                        android:layout_marginLeft="@dimen/spacing_normal_16"
+                        android:id="@+id/repositories_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
 
-                        <EditText
-                            android:id="@+id/repository"
-                            style="@style/rowEditText"
-                            android:hint="@string/repository"
-                            android:inputType="text"
-                            android:text="github.com/vladpap/DevIntensive"/>
-                    </android.support.design.widget.TextInputLayout>
-
-                    <ImageView
-                        style="@style/icon.right"
-                        android:id="@+id/view_git_2"
-                        android:src="@drawable/ic_remove_red_eye_black_24dp"/>
                 </LinearLayout>
 
                 <!-- End github row -->
@@ -234,16 +193,20 @@
                         android:layout_height="wrap_content">
 
                         <EditText
-                            android:id="@+id/about"
+                            android:id="@+id/about_user"
                             style="@style/rowEditText"
+                            android:paddingRight="@dimen/spacing_medium_32"
                             android:hint="@string/about"
                             android:inputType="textMultiLine"
                             android:text="@string/about_text"/>
                     </android.support.design.widget.TextInputLayout>
 
+                    <!--
                     <ImageView
                         style="@style/icon.right"
                         android:src="@drawable/ic_remove_red_eye_black_24dp"/>
+                        -->
+
                 </LinearLayout>
 
                 <!-- End about row -->
@@ -259,7 +222,7 @@
             android:background="@color/color_grey"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            app:layout_anchor="@id/nested_scroll_view"
+            app:layout_anchor="@id/nested_scroll_view_user"
             app:layout_anchorGravity="top"
             app:layout_behavior=".ui.behaviors.HeaderBehavior">
 
@@ -268,7 +231,7 @@
                 android:layout_weight="1.25">
 
                 <TextView
-                    android:id="@+id/count_rating"
+                    android:id="@+id/count_rating_user"
                     style="@style/textViewHeaderNumber"
                     android:text="5"/>
 
@@ -284,7 +247,7 @@
                 android:layout_weight="2">
 
                 <TextView
-                    android:id="@+id/count_code_line"
+                    android:id="@+id/count_code_line_user"
                     style="@style/textViewHeaderNumber"
                     android:text="5"/>
 
@@ -300,7 +263,7 @@
                 android:layout_weight="1.25">
 
                 <TextView
-                    android:id="@+id/count_projects"
+                    android:id="@+id/count_projects_user"
                     style="@style/textViewHeaderNumber"
                     android:text="5"/>
 
@@ -312,23 +275,5 @@
         </LinearLayout>
         <!-- END HEADER -->
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/fab_space_right"
-            android:src="@drawable/ic_create_black_24dp"
-            app:layout_anchor="@id/app_bar_layout"
-            app:layout_anchorGravity="bottom|right"/>
+
     </android.support.design.widget.CoordinatorLayout>
-
-    <android.support.design.widget.NavigationView
-        android:id="@+id/navigation_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="left"
-        app:headerLayout="@layout/drawer_header"
-        app:menu="@menu/drawer_menu">
-
-    </android.support.design.widget.NavigationView>
-</android.support.v4.widget.DrawerLayout>

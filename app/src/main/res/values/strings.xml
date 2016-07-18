@@ -26,4 +26,11 @@
     <string name="were_passwprd_login">Забыли пароль?</string>
     <string name="login_enter_btn">ВОЙТИ</string>
     <string name="password_login">Пароль</string>
+    <string name="fio">Фамилия Имя</string>
+    <string name="ff_medium">sans-serif-condensed-medium</string>
+    <string name="ff_regular">sans-serif</string>
+    <string name="view_txt">Просмотр</string>
+    <string name="team">Команда</string>
+    <string name="my_profile">Мой профиль</string>
+    <string name="my_team">Команда</string>
 </resources>

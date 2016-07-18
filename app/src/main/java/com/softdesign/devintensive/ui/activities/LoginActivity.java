@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -72,7 +73,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     private void loginSuccess(UserModelRes userModel) {
         mDataManager.getPreferenceManager().saveAuthToken(userModel.getData().getToken());
+        Log.e(TAG, userModel.getData().getToken());
         mDataManager.getPreferenceManager().saveUserID(userModel.getData().getUser().getId());
+        Log.e(TAG, userModel.getData().getUser().getId());
         saveUserValues(userModel);
 
         Intent loginIntent = new Intent(this, MainActivity.class);
@@ -145,8 +148,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         if (avatarStr.length() != 0) {
             mDataManager.getPreferenceManager().saveAvatarPhoto(Uri.parse(avatarStr));
         }
-        String name = userModel.getData().getUser().getFirstName() + userModel.getData().getUser().getSecondName();
-        mDataManager.getPreferenceManager().saveUserName(name);
+        mDataManager.getPreferenceManager().saveUserName(userModel.getData().getUser().getFullName());
     }
 
 
